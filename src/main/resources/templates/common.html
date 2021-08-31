@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>页面标题</title>
+</head>
+<body>
+<!--2、左侧全部公共部分-->
+<div th:fragment="commonNav">
+  <!-- Logo及登录用户信息 -->
+  <div class="profile clearfix">
+    <div class="profile_pic">
+      <img src="\images\touxian.jpg" alt="..." class="img-circle profile_img">
+    </div>
+    <div class="profile_info">
+      <span>welcome：</span>
+      <h2>欢迎使用</h2>
+    </div>
+  </div>
+  <!-- /Logo及登录用户信息 -->
+  <br />
+  <!-- 左侧导航栏 -->
+  <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+    <div class="menu_section">
+      <ul class="nav side-menu">
+        <li><a  sec:authorize="hasAuthority('公司管理')"><i class="fa fa-home"></i> 公司管理 <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li sec:authorize="hasAuthority('公司管理_公司列表')"><a th:href="@{/CompanyModule/listCompany}">公司列表</a></li>
+            <li sec:authorize="hasAuthority('公司管理_公司图表')"><a th:href="@{/CompanyModule/chartHtml}">公司图表</a></li>
+            <li><a th:href="@{/CompanyReport/showHtml}">公司报表</a></li>
+          </ul>
+        </li>
+        <li><a sec:authorize="hasAuthority('系统管理')"><i class="fa fa-edit"></i> 系统管理 <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li sec:authorize="hasAuthority('系统管理')"><a th:href="@{/security/ListUserRoleAuthHTML}">账号角色权限</a></li>
+            <li sec:authorize="hasAuthority('系统管理_Druid数据库连接池')"><a href="http://127.0.0.1:8081/druid/" target="_blank">Druid数据库连接池</a></li>
+            <li sec:authorize="hasAuthority('系统管理_操作日志')"><a th:href="@{/SystemlogModule/listSystemlogHTML}">操作日志</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="chartjs.html">Chart JS</a></li>
+            <li><a href="chartjs2.html">Chart JS2</a></li>
+            <li><a href="morisjs.html">Moris JS</a></li>
+            <li><a href="echarts.html">ECharts</a></li>
+            <li><a href="other_charts.html">Other Charts</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-clone"></i>Layouts <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
+            <li><a href="fixed_footer.html">Fixed Footer</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+  <!-- /左侧导航栏 -->
+</div>
+<!--/左侧全部公共部分-->
+
+<!--3、顶部公共部分-->
+<div th:fragment="commonTop">
+  <div class="top_nav">
+    <div class="nav_menu">
+      <div class="nav toggle">
+        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+      </div>
+      <nav class="nav navbar-nav">
+        <ul class=" navbar-right">
+          <li class="nav-item dropdown open" style="padding-left: 15px;">
+            <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+              <img src="images/touxian1.jpg" alt="">黄大大
+            </a>
+            <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item"  href="javascript:;"> 属性</a>
+              <a class="dropdown-item"  href="javascript:;">
+                <span class="badge bg-red pull-right">50%</span>
+                <span>设置</span>
+              </a>
+              <a class="dropdown-item"  href="javascript:;">帮助</a>
+              <a class="dropdown-item"  href="login.html"><i class="fa fa-sign-out pull-right"></i>注销</a>
+            </div>
+          </li>
+
+          <li role="presentation" class="nav-item dropdown open">
+            <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-envelope-o"></i>
+              <span class="badge bg-green">6</span>
+            </a>
+            <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
+              <li class="nav-item">
+                <a class="dropdown-item">
+                  <span class="image"><img src="\images\hxs.jpg" alt="Profile Image" /></span>
+                  <span>
+                            <span>黄先生</span>
+                            <span class="time">4 mins ago</span>
+                          </span>
+                  <span class="message">
+                            Film festivals used to be do-or-die moments for movie makers. They were where...
+                          </span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="dropdown-item">
+                  <span class="image"><img src="images/zptz.jpg" alt="Profile Image" /></span>
+                  <span>
+                            <span>招聘通知</span>
+                            <span class="time">56 mins ago</span>
+                          </span>
+                  <span class="message">
+                            Film festivals used to be do-or-die moments for movie makers. They were where...
+                          </span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="dropdown-item">
+                  <span class="image"><img src="images/johnsmith.jpg" alt="Profile Image" /></span>
+                  <span>
+                            <span>John Smith</span>
+                            <span class="time">13 mins ago</span>
+                          </span>
+                  <span class="message">
+                            Film festivals used to be do-or-die moments for movie makers. They were where...
+                          </span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="dropdown-item">
+                  <span class="image"><img src="images/qqtd.jpg" alt="Profile Image" /></span>
+                  <span>
+                            <span>QQ团队</span>
+                            <span class="time">1 mins ago</span>
+                          </span>
+                  <span class="message">
+                            Film festivals used to be do-or-die moments for movie makers. They were where...
+                          </span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <div class="text-center">
+                  <a class="dropdown-item">
+                    <strong>查看所有通知</strong>
+                    <i class="fa fa-angle-right"></i>
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+<!--/顶部公共部分-->
+
+</body>
+</html>
